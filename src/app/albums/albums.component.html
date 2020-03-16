@@ -1,9 +1,14 @@
 <div class="container">
   <div class="row">
-    <div class="col">album component</div>
-    <div *ngFor="let album of albumtest">
-      {{ album }}
+    <div class="col"><h2>Albums</h2></div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <select class="form-control">
+        <option *ngFor="let album of listAlbums">
+          Username-{{ album.userName }}--Title-{{ album.title }}
+        </option>
+      </select>
     </div>
-    <app-album-details></app-album-details>
   </div>
 </div>
