@@ -16,9 +16,9 @@ export class AlbumService {
   fetchAlbums(): Observable<any> {
     return this.http.get<Album[]>(this.albumUrl).pipe(
       tap(albums => {
-        albums.map(singleAlbum => {
-          this.fetchUsers(singleAlbum.userId).subscribe((user: any) => {
-            singleAlbum.userName = user[0].username;
+        albums.map((album: { userId: String; userName: String }) => {
+          this.fetchUsers(album.userId).subscribe((user: any) => {
+            album.userName = user[0].username;
           });
         });
       })
@@ -26,7 +26,7 @@ export class AlbumService {
   }
 
   //get the user name of the particular album with the help of userId property in albums
-  fetchUsers(id: string): Observable<any> {
+  fetchUsers(id: String): Observable<any> {
     //let userId = new HttpParams().set("userId", id);
     return this.http.get(this.userUrl + id);
   }
