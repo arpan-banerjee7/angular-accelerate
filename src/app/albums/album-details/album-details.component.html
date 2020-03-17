@@ -1,1 +1,8 @@
-<p>album-details works!</p>
+<ul class="list-group">
+  <li class="list-group-item">
+    <a [routerLink]="['/albums', albumDetail.id]"
+      ><h3>{{ albumDetail.title }}</h3></a
+    >
+    <p>Author: {{ albumDetail.userName }}</p>
+  </li>
+</ul>

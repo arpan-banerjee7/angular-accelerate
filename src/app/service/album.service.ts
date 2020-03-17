@@ -10,6 +10,9 @@ export class AlbumService {
   constructor(private http: HttpClient) {}
   albumUrl = "http://jsonplaceholder.typicode.com/albums";
   userUrl = "http://jsonplaceholder.typicode.com/users?id=";
+  photoUrl = "http://jsonplaceholder.typicode.com/photos";
+
+  //get the album title along with the user name
   fetchAlbums(): Observable<any> {
     return this.http.get<Album[]>(this.albumUrl).pipe(
       tap(albums => {
@@ -21,8 +24,18 @@ export class AlbumService {
       })
     );
   }
-  fetchUsers(id: String): Observable<any> {
+
+  //get the user name of the particular album with the help of userId property in albums
+  fetchUsers(id: string): Observable<any> {
     //let userId = new HttpParams().set("userId", id);
     return this.http.get(this.userUrl + id);
+  }
+
+  //get the photos of a particular album using the albumId
+  fetchPhotos(id: string): Observable<any> {
+    let selectedId = new HttpParams().set("albumId", id);
+    return this.http.get(this.photoUrl, {
+      params: selectedId
+    });
   }
 }

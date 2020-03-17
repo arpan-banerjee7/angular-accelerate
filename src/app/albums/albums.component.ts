@@ -10,15 +10,18 @@ import { Album } from "../model/album.model";
 export class AlbumsComponent implements OnInit {
   constructor(private albumService: AlbumService) {}
   listAlbums: Album[] = [];
-  albumtest: String[] = [];
+  isLoading: Boolean;
+
   ngOnInit() {
+    this.isLoading = true;
     this.getAlbums();
   }
 
   getAlbums() {
     this.albumService.fetchAlbums().subscribe(data => {
-      this.albumtest = data;
+      this.listAlbums = data;
       console.log(data);
+      this.isLoading = false;
     });
   }
 }
