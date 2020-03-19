@@ -1,7 +1,9 @@
 import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute, Params } from "@angular/router";
+import { ActivatedRoute, Params, Router } from "@angular/router";
 import { FnParam } from "@angular/compiler/src/output/output_ast";
 import { AlbumService } from "../service/album.service";
+import { Photo } from "../model/photo.model";
+import { PhotoSevice } from "./photo.service";
 
 @Component({
   selector: "app-photos",
@@ -10,18 +12,38 @@ import { AlbumService } from "../service/album.service";
 })
 export class PhotosComponent implements OnInit {
   selectedAlbumId: string;
+  photoList: Photo[] = [];
+  photoSelected: Photo;
+  isLoading: Boolean;
   constructor(
     private rout: ActivatedRoute,
-    private albumService: AlbumService
+    private albumService: AlbumService,
+    private router: Router,
+    private photoService: PhotoSevice
   ) {}
 
   ngOnInit() {
+    this.isLoading = true;
     this.rout.params.subscribe((params: Params) => {
       this.selectedAlbumId = params["id"];
-      this.albumService
-        .fetchPhotos(this.selectedAlbumId)
-        .subscribe(data => console.log(data));
-      //alert("album selecyted" + this.selectedAlbumId);
+      this.getPhotos(this.selectedAlbumId);
     });
+  }
+
+  getPhotos(id: string) {
+    this.albumService.fetchPhotos(this.selectedAlbumId).subscribe(photo => {
+      this.photoList = photo;
+      this.isLoading = false;
+    });
+  }
+
+  displayPhoto(url: string, title: string) {
+    let photoObject = {
+      url: url,
+      title: title
+    };
+    console.log(photoObject);
+    this.photoService.photoSelected.emit(photoObject);
+    this.router.navigate(["/photo-detail"]);
   }
 }

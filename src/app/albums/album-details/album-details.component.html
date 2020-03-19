@@ -1,8 +1,14 @@
-<ul class="list-group">
-  <li class="list-group-item">
-    <a [routerLink]="['/albums', albumDetail.id]"
-      ><h3>{{ albumDetail.title }}</h3></a
-    >
-    <p>Author: {{ albumDetail.userName }}</p>
-  </li>
-</ul>
+<div class="container">
+  <div class="row">
+    <div class="col-md-5">
+      <ul class="list-group">
+        <li class="list-group-item">
+          <a [routerLink]="['/albums', albumDetail.id]"
+            ><p>{{ albumDetail.title }}</p></a
+          >
+          <p>Author: {{ albumDetail.userName }}</p>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

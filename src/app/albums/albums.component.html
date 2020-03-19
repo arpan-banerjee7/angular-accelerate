@@ -1,14 +1,10 @@
 <div *ngIf="isLoading">
   <h3>Loading...</h3>
 </div>
-<div *ngIf="!isLoading">
-  <div class="container">
-    <div class="row">
-      <div class="col">Albums</div>
-      <app-album-details
-        [albumDetail]="album"
-        *ngFor="let album of listAlbums"
-      ></app-album-details>
-    </div>
-  </div>
+<div class="container" *ngIf="!isLoading">
+  <h3>Albums</h3>
+  <app-album-details
+    [albumDetail]="album"
+    *ngFor="let album of listAlbums"
+  ></app-album-details>
 </div>

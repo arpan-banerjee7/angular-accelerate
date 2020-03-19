@@ -1,1 +1,22 @@
-<p>photos works!</p>
+<div *ngIf="isLoading">
+  <h3>Loading...</h3>
+</div>
+
+<div class="container" *ngIf="!isLoading">
+  <div class="card-columns">
+    <div *ngFor="let photo of photoList" class="card">
+      <img
+        class="card-img-top"
+        src="{{ photo.thumbnailUrl }}"
+        alt="https://source.unsplash.com/random/300x200"
+      />
+      <div class="card-body">
+        <a
+          class="btn btn-primary btn-block"
+          (click)="displayPhoto(photo.url, photo.title)"
+          >Enlarge Image</a
+        >
+      </div>
+    </div>
+  </div>
+</div>
