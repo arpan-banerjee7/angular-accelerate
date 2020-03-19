@@ -8,15 +8,17 @@ import { Photo } from "src/app/model/photo.model";
   styleUrls: ["./photo-detail.component.css"]
 })
 export class PhotoDetailComponent implements OnInit {
-  @Input() selectedPhotoUrl: string;
-  @Input() selectedPhotoTitle: string;
   url: string;
+  title: string;
   constructor(private photoService: PhotoSevice) {}
 
   ngOnInit() {
-    this.photoService.photoSelected.subscribe(photoObject => {
-      this.url = photoObject.url;
-      console.log(photoObject.url);
-    });
+    // this.photoService.photoSelected.subscribe(photoObject => {
+    //   this.url = photoObject.url;
+    // this.title=photoObject.title;
+    //   console.log(photoObject.url);
+    // });
+    this.url = this.photoService.urlService;
+    console.log(this.url);
   }
 }

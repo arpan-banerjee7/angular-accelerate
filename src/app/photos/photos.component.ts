@@ -38,12 +38,13 @@ export class PhotosComponent implements OnInit {
   }
 
   displayPhoto(url: string, title: string) {
-    let photoObject = {
-      url: url,
-      title: title
-    };
-    console.log(photoObject);
-    this.photoService.photoSelected.emit(photoObject);
+    // let photoObject = {
+    //   url: url,
+    //   title: title
+    // };
+    //console.log(photoObject);
+    //this.photoService.photoSelected.emit(photoObject);
+    this.photoService.urlService = url;
     this.router.navigate(["/photo-detail"]);
   }
 }
