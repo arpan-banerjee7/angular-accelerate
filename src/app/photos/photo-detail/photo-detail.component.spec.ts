@@ -1,16 +1,17 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { PhotoDetailComponent } from './photo-detail.component';
+import { PhotoDetailComponent } from "./photo-detail.component";
+import { PhotoSevice } from "../photo.service";
 
-describe('PhotoDetailComponent', () => {
+describe("PhotoDetailComponent", () => {
   let component: PhotoDetailComponent;
   let fixture: ComponentFixture<PhotoDetailComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PhotoDetailComponent ]
-    })
-    .compileComponents();
+      declarations: [PhotoDetailComponent],
+      providers: [PhotoSevice]
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -19,7 +20,12 @@ describe('PhotoDetailComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
+  });
+  it("should use url from photo service", () => {
+    let urlService = fixture.debugElement.injector.get(PhotoSevice);
+    fixture.detectChanges;
+    expect(urlService.urlService).toEqual(component.url);
   });
 });

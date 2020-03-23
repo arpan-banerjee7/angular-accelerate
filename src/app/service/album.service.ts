@@ -8,19 +8,23 @@ import { UserName } from "../model/user.model";
 @Injectable({ providedIn: "root" })
 export class AlbumService {
   constructor(private http: HttpClient) {}
-  albumUrl = "http://jsonplaceholder.typicode.com/albums";
-  userUrl = "http://jsonplaceholder.typicode.com/users?id=";
-  photoUrl = "http://jsonplaceholder.typicode.com/photos";
+  albumUrl =
+    "https://cors-anywhere.herokuapp.com/http://jsonplaceholder.typicode.com/albums";
+  userUrl =
+    "https://cors-anywhere.herokuapp.com/http://jsonplaceholder.typicode.com/users?id=";
+  photoUrl =
+    "https://cors-anywhere.herokuapp.com/http://jsonplaceholder.typicode.com/photos";
 
   //get the album title along with the user name
-  fetchAlbums(): Observable<any> {
+  fetchAlbums() {
     return this.http.get<Album[]>(this.albumUrl).pipe(
       tap(albums => {
-        albums.map((album: { userId: String; userName: String }) => {
+        albums.map((album: { userId: string; userName: string }) => {
           this.fetchUsers(album.userId).subscribe((user: any) => {
             album.userName = user[0].username;
           });
         });
+        // console.log(albums);
       })
     );
   }
