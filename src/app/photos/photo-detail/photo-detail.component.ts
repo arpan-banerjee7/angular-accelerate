@@ -13,12 +13,12 @@ export class PhotoDetailComponent implements OnInit {
   constructor(private photoService: PhotoSevice) {}
 
   ngOnInit() {
-    // this.photoService.photoSelected.subscribe(photoObject => {
-    //   this.url = photoObject.url;
-    // this.title=photoObject.title;
-    //   console.log(photoObject.url);
-    // });
-    this.url = this.photoService.urlService;
-    console.log(this.url);
+    this.photoService.photoSelected.subscribe(photoObject => {
+      this.url = photoObject.url;
+      this.title = photoObject.title;
+      console.log("inside subscribe " + this.url);
+    });
+    // this.url = this.photoService.urlService;
+    console.log("outside subscribe " + this.url);
   }
 }

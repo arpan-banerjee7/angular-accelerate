@@ -20,7 +20,7 @@ export class AlbumsComponent implements OnInit {
   getAlbums() {
     this.albumService.fetchAlbums().subscribe(data => {
       this.listAlbums = data;
-      console.log("inside subscibe method-->" + this.listAlbums); // we have data here
+      //console.log("inside subscibe method-->" + this.listAlbums); // we have data here
       this.isLoading = false;
     });
     console.log("outside subscribe method----->" + this.listAlbums); //empty list==== but somehow we have the value in the view , this doesn t work
